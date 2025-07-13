@@ -6,8 +6,6 @@ from dotenv import load_dotenv
 from flask_bcrypt import Bcrypt
 from code_review import analyze_code, fix_code
 from pdf_export import generate_pdf
-
-from flask_sqlalchemy import SQLAlchemy
 from models import db, User
 
 
@@ -43,6 +41,27 @@ def login():
             return redirect('/login')
     return render_template('login.html')
 
+@app.route('/register', methods=['GET', 'POST']) # Sign up page Route
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        raw_password = request.form['password']
+        hashed_password = bcrypt.generate_password_hash(raw_password).decode('utf-8')
+        new_user = User(username=username, email=email, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        session['user'] = email
+        session['username'] = username
+        return redirect('/')
+    return render_template('register.html')
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
+
 
 @app.route('/')      # Home Page Route
 def index():
@@ -58,3 +77,7 @@ def index():
         input_method=session.get('input_method', 'text'),
         username=session.get('username', 'Guest')
     )
+
+if __name__ == '__main__':
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+    app.run(debug=True)
