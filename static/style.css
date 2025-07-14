@@ -1,1 +1,323 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f6f9fc;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Top banner */
+.hero-section {
+  position: relative;
+  padding: 6rem 1rem 5rem 1rem; /* Final consistent padding */
+  background: linear-gradient(135deg, #450a0a, #731b5e, #e36414); /* deep red → purple → orange */
+  color: #ffffff;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  border-radius: 0;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('/static/images/pexels-luis-gomes-166706-546819.jpg') no-repeat center top;
+  background-size: cover;
+  background-position-y: 20%;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.hero-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.hero-section p {
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  opacity: 0.95;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+/* Main container centered */
+.review-container {
+  background: white;
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 4rem;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-40px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Radio input group */
+.input-method {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Text editor styling */
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  border: 1px solid #3c3c3c;
+  border-radius: 12px;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 1rem;
+  resize: vertical;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  caret-color: #ffffff;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+textarea::placeholder {
+  color: #808080;
+}
+
+/* Button styling */
+button,
+.export-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to right, #f72585, #fb8500);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+button:hover,
+.export-btn:hover {
+  opacity: 0.9;
+}
+
+.results {
+  margin-top: 2rem;
+}
+
+.results h3 {
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+pre {
+  background: #f3f4f6;
+  padding: 1rem;
+  border-radius: 12px;
+  font-family: monospace;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
+
+.export-btn {
+  margin-top: 1rem;
+  background: linear-gradient(to right, #f72585, #fb8500);
+}
+
+.scrollable {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+input[type="file"] {
+  margin-bottom: 1rem;
+}
+
+/* Dashed box style for file input */
+#file-input-box {
+  display: none;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: #f9fafb;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+#file-input-box input[type="file"] {
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Logout form styling */
+.logout-form button {
+  background: white;
+  color: #731b5e;
+  font-weight: 600;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.logout-form button:hover {
+  background: linear-gradient(to right, #f72585, #fb8500);
+  color: white;
+}
+
+/* 👤 User info box + Logout button container */
+.top-bar {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.user-info {
+  background: white;
+  color: #731b5e;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Loading Spinner Overlay */
+#loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loadingOverlay:not(.hidden) {
+  display: flex;
+}
+
+.loading-text {
+  color: white;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  font-weight: 500;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ✅ Pulse Dot Spinner */
+.spinner-dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.spinner-dots div {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fb8500;
+  animation: pulse 1.4s infinite ease-in-out both;
+}
+
+.spinner-dots div:nth-child(1) {
+  animation-delay: -0.32s;
+}
+.spinner-dots div:nth-child(2) {
+  animation-delay: -0.16s;
+}
+.spinner-dots div:nth-child(3) {
+  animation-delay: 0;
+}
+
+@keyframes pulse {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.ai-fix-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to right, #7c3aed, #f59e0b); /* cyan to blue */
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  margin-top: 1rem;
+}
+
+.ai-fix-btn:hover {
+  opacity: 0.9;
+}
+
+/* 🔁 Minimal Refresh Icon Button */
+/* Proper top-right icon inside review box */
+.refresh-container {
+  position: relative;
+}
+
+.refresh-icon-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  margin-right: -22rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color:gray;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.refresh-icon-btn:hover {
+  transform: rotate(90deg);
+}
 

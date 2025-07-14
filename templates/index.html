@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Codalyze - AI Code Reviewer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Spinner Overlay -->
+  <div id="loadingOverlay" class="hidden">
+    <div class="spinner-dots">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <p class="loading-text">Analyzing the code...</p>
+  </div>
+
+  <!-- Top Right Username + Logout -->
+  <div class="top-bar">
+    <div class="user-info">
+      User: {{ session['username'] }}
+    </div>
+    <form action="/logout" method="get" class="logout-form">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+
+  <div class="hero-section">
+    <h1>Codalyze</h1>
+    <p>AI-powered code review assistant</p>
+  </div>
+
+  <div class="review-container">
+
+    <!-- 🔁 Small Refresh Button (Top-right inside box) -->
+    <div class="refresh-container">
+      <button type="button" id="refreshBtn" class="refresh-icon-btn" title="Clear code and suggestions">⟳</button>
+    </div>
+
+    <form id="reviewForm" action="/review" method="POST" enctype="multipart/form-data">
+      <div class="input-method">
+        <label><input type="radio" name="inputMethod" value="text" checked> Text Input</label>
+        <label><input type="radio" name="inputMethod" value="file"> File Upload</label>
+      </div>
+
+      <textarea id="text-input" name="codeEditor" placeholder="Paste your code here..." rows="10" {% if not code %}required{% endif %}>{{ code or '' }}</textarea>
+
+      <div id="file-input-box">
+        <input type="file" name="codeFile" id="codeFile" />
+        <p>Choose a file to upload or drag it here</p>
+      </div>
+
+      <button type="submit">Review Code</button>
+    </form>
+
+    {% if code %}
+    <form action="/fix" method="POST" style="margin-top: 1rem;">
+      <input type="hidden" name="codeEditor" value="{{ code }}">
+      <button type="submit" class="ai-fix-btn">AI Fix</button>
+    </form>
+    {% endif %}
+
+    {% if suggestions and not fixed_code %}
+<div class="results" id="suggestionBox">
+
+    <div class="results" id="suggestionBox">
+      <h3>AI Suggestions</h3>
+      <div class="scrollable">
+        <pre>{{ suggestions }}</pre>
+      </div>
+      <form action="/export" method="POST">
+        <input type="hidden" name="suggestions" value="{{ suggestions }}">
+        <input type="hidden" name="code" value="{{ code }}">
+        <button class="export-btn" type="submit">Download PDF</button>
+      </form>
+    </div>
+    {% endif %}
+
+    {% if fixed_code %}
+    <div class="results" style="margin-top: 2rem;" id="fixedCodeBox">
+      <h3>AI Fixed Code</h3>
+      <div class="scrollable">
+        <pre>{{ fixed_code }}</pre>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
