@@ -77,6 +77,51 @@ def index():
         input_method=session.get('input_method', 'text'),
         username=session.get('username', 'Guest')
     )
+@app.route('/review', methods=['POST'])
+def review():
+    if 'user' not in session:
+        return redirect('/login')
+
+    code_text = ""
+    input_method = request.form.get("inputMethod")
+
+    if input_method == "text":
+        code_text = request.form.get("codeEditor", "")
+    elif input_method == "file":
+        file = request.files.get("codeFile")
+        if file:
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                code_text = f.read()
+
+    suggestions = analyze_code(code_text)
+
+    # Save to session
+    session['code'] = code_text
+    session['suggestions'] = suggestions
+    session['input_method'] = input_method
+    session.pop('fixed_code', None)
+
+    return redirect('/')
+
+
+@app.route('/fix', methods=['POST'])
+def fix():
+    if 'user' not in session:
+        return redirect('/login')
+
+    code = request.form.get("codeEditor", "")
+    fixed_code = fix_code(code)
+
+    # Update session to remove suggestions when fixed code is shown
+    session['code'] = code
+    session['fixed_code'] = fixed_code
+    session['input_method'] = 'text'
+    session.pop('suggestions', None)  # ✅ Hide suggestions when AI Fix is triggered
+
+    return redirect('/')
 
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
