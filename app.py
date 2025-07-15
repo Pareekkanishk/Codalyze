@@ -123,6 +123,22 @@ def fix():
 
     return redirect('/')
 
+@app.route('/export', methods=['POST'])
+def export():
+    if 'user' not in session:
+        return redirect('/login')
+
+    code = request.form.get("code", "")
+    suggestions = request.form.get("suggestions", "")
+    pdf_file = generate_pdf(code, suggestions)
+
+    return send_file(
+        pdf_file,
+        as_attachment=True,
+        download_name="codalyze_review.pdf",
+        mimetype="application/pdf"
+    )
+
 # Clear session via JS for Refresh Button
 @app.route("/clear", methods=["POST"])
 def clear():
