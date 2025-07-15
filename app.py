@@ -119,9 +119,18 @@ def fix():
     session['code'] = code
     session['fixed_code'] = fixed_code
     session['input_method'] = 'text'
-    session.pop('suggestions', None)  # ✅ Hide suggestions when AI Fix is triggered
+    session.pop('suggestions', None)  # Hide suggestions when AI Fix is triggered
 
     return redirect('/')
+
+# Clear session via JS for Refresh Button
+@app.route("/clear", methods=["POST"])
+def clear():
+    session.pop("code", None)
+    session.pop("suggestions", None)
+    session.pop("fixed_code", None)
+    session.pop("input_method", None)
+    return '', 204
 
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
