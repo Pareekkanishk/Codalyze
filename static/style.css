@@ -9,11 +9,11 @@ body {
   overflow-x: hidden;
 }
 
-/* Top banner */
+
 .hero-section {
   position: relative;
-  padding: 6rem 1rem 5rem 1rem; /* Final consistent padding */
-  background: linear-gradient(135deg, #450a0a, #731b5e, #e36414); /* deep red → purple → orange */
+  padding: 6rem 1rem 5rem 1rem; 
+  background: linear-gradient(135deg, #450a0a, #731b5e, #e36414); 
   color: #ffffff;
   text-align: center;
   font-family: 'Segoe UI', sans-serif;
@@ -54,7 +54,6 @@ body {
   margin-inline: auto;
 }
 
-/* Main container centered */
 .review-container {
   background: white;
   width: 90%;
@@ -70,14 +69,14 @@ body {
   align-items: stretch;
 }
 
-/* Radio input group */
+
 .input-method {
   margin-bottom: 1rem;
   display: flex;
   gap: 1.5rem;
 }
 
-/* Text editor styling */
+
 textarea {
   width: 100%;
   box-sizing: border-box;
@@ -99,7 +98,7 @@ textarea::placeholder {
   color: #808080;
 }
 
-/* Button styling */
+
 button,
 .export-btn {
   width: 100%;
@@ -151,7 +150,7 @@ input[type="file"] {
   margin-bottom: 1rem;
 }
 
-/* Dashed box style for file input */
+
 #file-input-box {
   display: none;
   border: 2px dashed #cbd5e1;
@@ -171,7 +170,7 @@ input[type="file"] {
   cursor: pointer;
 }
 
-/* Logout form styling */
+
 .logout-form button {
   background: white;
   color: #731b5e;
@@ -190,7 +189,7 @@ input[type="file"] {
   color: white;
 }
 
-/* 👤 User info box + Logout button container */
+
 .top-bar {
   position: absolute;
   top: 1rem;
@@ -212,7 +211,7 @@ input[type="file"] {
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* Loading Spinner Overlay */
+
 #loadingOverlay {
   position: fixed;
   top: 0;
@@ -242,7 +241,7 @@ input[type="file"] {
   display: none;
 }
 
-/* ✅ Pulse Dot Spinner */
+
 .spinner-dots {
   display: flex;
   gap: 0.5rem;
@@ -283,7 +282,7 @@ input[type="file"] {
 .ai-fix-btn {
   width: 100%;
   padding: 0.75rem;
-  background: linear-gradient(to right, #7c3aed, #f59e0b); /* cyan to blue */
+  background: linear-gradient(to right, #7c3aed, #f59e0b); 
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -298,8 +297,7 @@ input[type="file"] {
   opacity: 0.9;
 }
 
-/* 🔁 Minimal Refresh Icon Button */
-/* Proper top-right icon inside review box */
+
 .refresh-container {
   position: relative;
 }

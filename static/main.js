@@ -46,15 +46,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ⟳ Refresh logic
+  // Refresh logic
   if (refreshBtn) {
     refreshBtn.addEventListener("click", async () => {
-      // Clear input and boxes
+      
       if (textArea) textArea.value = "";
       if (suggestionBox) suggestionBox.remove();
       if (fixedCodeBox) fixedCodeBox.remove();
 
-      // Call backend to clear session data
+      
       await fetch('/clear', { method: 'POST' });
     });
   }

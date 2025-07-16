@@ -1,4 +1,3 @@
-/* Background Gradient matching Codalyze theme */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -42,7 +41,7 @@ body::before {
   margin-top: 0.5rem;
 }
 
-/* Login container */
+
 .login-container {
   position: relative;
   z-index: 1;
@@ -54,14 +53,14 @@ body::before {
   text-align: center;
 }
 
-/* Login heading */
+
 .login-container h2 {
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
   color: #450a0a;
 }
 
-/* Input Fields */
+
 .login-container input[type="text"],
 .login-container input[type="email"],
 .login-container input[type="password"] {
@@ -76,7 +75,7 @@ body::before {
   background: #f9f9f9;
 }
 
-/* Button styling */
+
 .login-container button {
   width: 90%;
   display: block;
@@ -97,7 +96,7 @@ body::before {
   opacity: 0.95;
 }
 
-/* Sign up text */
+
 .login-container p {
   margin-top: 1rem;
   font-size: 0.9rem;
