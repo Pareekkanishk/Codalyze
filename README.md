@@ -18,7 +18,7 @@ It helps developers catch mistakes, improve code quality, and generate suggestio
 
 - 🧠 AI-Powered Code Review: Detects errors, bad practices, and improvements using AI.
 - 🔧 AI Auto-Fix: Automatically generates corrected versions of the input code.
-- 📝 Multiple Input Methods: Supports text input and .py file upload for review.
+- 📝 Multiple Input Methods: Supports text input and various code file upload for review.
 - 📄 PDF Export: Downloads AI-generated code reviews and corrections as PDF reports.
 - 🔐 User Authentication: Secure registration and login with Flask-Bcrypt encryption.
 - 🖥️ Modern UI: Professional, intuitive interface inspired by Codacy and SonarQube.
